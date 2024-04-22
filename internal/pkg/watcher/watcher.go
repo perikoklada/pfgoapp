@@ -7,7 +7,8 @@ import (
 )
 
 type Counter struct {
-	Iteration int `json:"iteration"`
+	Iteration int    `json:"iteration"`
+	Output    string `json:"output"`
 }
 
 type CounterReset struct{}
@@ -41,8 +42,9 @@ func (w *Watcher) Start() error {
 		defer wg.Done()
 		for {
 			select {
-			case <-w.inCh:
+			case output := <-w.inCh:
 				w.counter.Iteration += 1
+				w.counter.Output = output
 				select {
 				case w.outCh <- w.counter:
 				case <-w.quitChannel:
