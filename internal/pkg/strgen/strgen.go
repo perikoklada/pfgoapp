@@ -2,6 +2,7 @@ package strgen
 
 import (
 	"goapp/pkg/util"
+	"log"
 	"sync"
 	"time"
 )
@@ -37,8 +38,15 @@ func (s *StringGenerator) mainLoop() {
 	defer s.running.Done()
 
 	for {
+
+		res, err := util.RandString(10)
+		if err != nil {
+			log.Printf("error: %v\n", err)
+			continue
+		}
+
 		select {
-		case s.strChan <- util.RandString(10):
+		case s.strChan <- res:
 		case <-s.quitChannel:
 			return
 		default:
