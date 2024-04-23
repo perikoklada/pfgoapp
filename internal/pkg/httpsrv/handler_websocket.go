@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"goapp/internal/pkg/watcher"
+	"goapp/pkg/util"
 
 	"github.com/gorilla/websocket"
 )
@@ -26,7 +27,7 @@ func (s *Server) handlerWebSocket(w http.ResponseWriter, r *http.Request) {
 	// Start WS.
 	var upgrader = websocket.Upgrader{
 		CheckOrigin: func(r *http.Request) bool {
-			return true
+			return util.IsSameOrigin(r)
 		},
 	}
 
