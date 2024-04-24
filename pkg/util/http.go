@@ -7,14 +7,14 @@ import (
 )
 
 const (
-	originHeaderName = "Origin"
+	OriginHeaderName = "Origin"
 )
 
 func IsSameOrigin(r *http.Request) bool {
 
 	var originHeaderSlice []string
 	var ok bool
-	if originHeaderSlice, ok = r.Header[originHeaderName]; !ok || len(originHeaderSlice) == 0 {
+	if originHeaderSlice, ok = r.Header[OriginHeaderName]; !ok || len(originHeaderSlice) == 0 {
 		log.Printf("origin header not present in the request")
 		return false
 	}
