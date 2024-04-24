@@ -11,7 +11,7 @@ import (
 func TestRandString(t *testing.T) {
 	res, err := RandString(15)
 	assert.NoError(t, err)
-	assert.Equal(t, "0x78b9Ea5a46B732e", res, "string generated was not as expected.")
+	assert.Equal(t, "0x78b9Ea5a46B732e", res, "strings should be equal.")
 }
 
 func TestRandStringInvalidInputNeg(t *testing.T) {
@@ -26,7 +26,7 @@ func TestRandStringInvalidInputZero(t *testing.T) {
 
 // Benchmark tests
 // go test -v -benchmem -run=XXX -bench=. ./...
-// TODO need a strategy for storing baselines and comparing with past resultsgit
+// TODO need a strategy for storing baselines and comparing with past results
 func BenchmarkRandString10(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		RandString(10)
